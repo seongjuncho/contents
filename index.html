@@ -1,7 +1,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script>
 $(function() {	
-	$.get("it", {rss:'https://www.hani.co.kr/rss/international'}, function(data) {
+	$.get("it", {rss:'https://images-cdn.newspic.kr/rss/np221229k5RYB73P_story.xml'}, function(data) {
 		console.log(data);
 		var dataXml = $.parseXML(data);
 		console.log(dataXml);
