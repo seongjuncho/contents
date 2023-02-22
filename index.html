@@ -1,11 +1,9 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script>
-/*
 function to_ajax(){
 	$.ajax({
 		type : 'get',
-		crossDomain: true,
-		url : 'https://images-cdn.newspic.kr/rss/np221229k5RYB73P_story.xml',
+		url : 'https://seongjuncho.github.io/contents/pick.xml',
 		dataType : 'xml',
 		headers: {
 			"accept": "application/xml",
@@ -20,22 +18,4 @@ function to_ajax(){
 	});
 }
 to_ajax();
-*/
-
-var settings = {
-	'cache': false,
-	'dataType': 'jsonp',
-	'async': true,
-	'crossDomain': true,
-	'url': 'https://images-cdn.newspic.kr/rss/np221229k5RYB73P_story.xml',
-	'method': 'GET',
-	'headers': {
-	  'accept': 'application/xml',
-	  'Access-Control-Allow-Origin':'*'
-	}
-}
-
-$.ajax(settings).done(function (response) {
-	console.log(response);
-});
 </script>
