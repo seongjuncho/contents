@@ -1,15 +1,16 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script>
+/*
 function to_ajax(){
 	$.ajax({
 		type : 'get',
+		crossDomain: true,
 		url : 'https://images-cdn.newspic.kr/rss/np221229k5RYB73P_story.xml',
 		dataType : 'xml',
-		beforeSend : function(xhr){
-			//xhr.setRequestHeader("ApiKey", "asdfasxdfasdfasdf");
-			xhr.setRequestHeader("X-Custom-Header", "pingpong");	
-			xhr.setRequestHeader("Content-type","application/xml");
-		},
+		headers: {
+			"accept": "application/xml",
+			"Access-Control-Allow-Origin":"*"
+		}
 		error: function(xhr, status, error){ 
 			alert(error); 
 		},
@@ -19,4 +20,22 @@ function to_ajax(){
 	});
 }
 to_ajax();
+*/
+
+var settings = {
+	'cache': false,
+	'dataType': 'jsonp',
+	'async': true,
+	'crossDomain': true,
+	'url': 'https://images-cdn.newspic.kr/rss/np221229k5RYB73P_story.xml',
+	'method': 'GET',
+	'headers': {
+	  'accept': 'application/xml',
+	  'Access-Control-Allow-Origin':'*'
+	}
+}
+
+$.ajax(settings).done(function (response) {
+	console.log(response);
+});
 </script>
