@@ -1,3 +1,65 @@
+<style>
+* {
+	box-sizing: border-box;
+}
+
+.list {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.list .item {
+	display: block;
+	width: calc(33.33333% - 30px);
+	margin: 15px;
+	padding: 20px 25px;
+	border: 1px solid #ccc;
+	border-radius: 16px;
+	text-decoration: none;
+	overflow: hidden;
+	transform: translateY(0);
+	transition: .5s;
+}
+
+.list .item:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 10px 10px rgba(0, 0, 0, .2);
+}
+
+.list .img-area {
+	position: relative;
+	margin: -20px -25px 20px;
+	padding-top: 56.25%;
+	border-bottom: 1px solid #ccc;
+}
+
+.list .img-area img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.list .subject {
+	height: 45px;
+	color: #666;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
+@media (max-width: 768px) {
+	.list .item {
+		width: calc(50% - 20px);
+		margin: 10px;
+	}
+}
+</style>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script>
 function to_ajax(){
@@ -5,17 +67,25 @@ function to_ajax(){
 		type : 'get',
 		url : 'https://seongjuncho.github.io/contents/pick.xml',
 		dataType : 'xml',
-		headers: {
-			"accept": "application/xml",
-			"Access-Control-Allow-Origin":"*"
-		}
-		error: function(xhr, status, error){ 
-			alert(error); 
-		},
 		success : function(xml){
-			alert(xml)
+			var data = $(xml).find('item');
+			var data_length = data.length;
+			if(data_length){
+				var html = '';
+				$.each(data, function(){
+					html += '<a href="'+$(this).find('link').text()+'" class="item" target="_blank">';
+					html += '		<div class="img-area">';
+					html += '			<img src="'+$(this).find('image').text()+'">';
+					html += '		</div>';
+					html += '		<div class="subject">'+$(this).find('title').text()+'</div>';
+					html += '</a>';
+				});
+
+				$('.list').append(html);
+			}
 		}
 	});
 }
 to_ajax();
 </script>
+<div class="list"></div>
