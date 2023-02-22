@@ -1,29 +1,22 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script>
-$(function() {	
-	$.get("it", {rss:'https://images-cdn.newspic.kr/rss/np221229k5RYB73P_story.xml'}, function(data) {
-		console.log(data);
-		var dataXml = $.parseXML(data);
-		console.log(dataXml);
-		
-	var str = "<table border='1'>"	
-	$(dataXml).find("item").each(function() {
-			var title = $(this).find("title").text();
-			var link = $(this).find("link").text();
-			var description = $(this).find("description").text();
-			var pubDate = $(this).find("pubDate").text();
-			
-			str += "<tr>"
-			str += "<td><a href='" + link + "'>" + title + "</a></td>"
-			str += "<td>" + pubDate + "</td>"
-			str += "</tr>"
-			
-			console.log(title, link, description, pubDate);
-		})
-	str += "</table>"
-	
-	$("body").append(str);
-	}, "text")
-})
-
+function to_ajax(){
+	$.ajax({
+		type : 'get',
+		url : 'https://images-cdn.newspic.kr/rss/np221229k5RYB73P_story.xml',
+		dataType : 'xml',
+		beforeSend : function(xhr){
+			//xhr.setRequestHeader("ApiKey", "asdfasxdfasdfasdf");
+			xhr.setRequestHeader("X-Custom-Header", "pingpong");	
+			xhr.setRequestHeader("Content-type","application/xml");
+		},
+		error: function(xhr, status, error){ 
+			alert(error); 
+		},
+		success : function(xml){
+			alert(xml)
+		}
+	});
+}
+to_ajax();
 </script>
